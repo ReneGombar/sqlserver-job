@@ -16,7 +16,7 @@ Schema for Users Table
 /*create master key for encrypting passwords column*/
 
 CREATE TABLE users(
-	id INT NOT NULL											-- id of the user 
+	userID INT NOT NULL											-- id of the user 
 	IDENTITY (1,1)											-- id is auto incremented
 	PRIMARY KEY,											-- id is a primary key 	
 	fname VARCHAR(100) NOT NULL,							-- first name is required
@@ -45,8 +45,8 @@ BEGIN
 	DECLARE @temp_username VARCHAR(50);
     DECLARE @count INT;
 	
-	/* create a fallback username by combining 1st letter of fname + 6 letters of lname and a 3 digit random number */
-	SET @username = LEFT(@first_name, 1) + LEFT(@last_name, 6) + LEFT(CAST( @randomNum * 1000 AS VARCHAR(20)),3);
+	/* create a fallback username by combining 1st letter of fname + 6 letters of lname and a 4 digit random number */
+	SET @username = LEFT(@first_name, 1) + LEFT(@last_name, 6) + LEFT(CAST( @randomNum * 1000 AS CHAR(4)),3);
 
 	/* create the first form of the username by combining 1st letter of fname + 6 letters of lname */
     SET @temp_username = LEFT(@first_name, 1) + LEFT(@last_name, 6);
